@@ -87,20 +87,32 @@ Incidents are most likely to occur in October.
 
 5. How do the number and types of injuries compare by county? Make a table that shows the number of injury types by county. Which county has the highest number incidents?
 ```{r}
-injury_by_county <- sharks %>% 
-  count(county, injury, sort = TRUE)
-
-print(injury_by_county)
+sharks %>%
+  select(county, injury) %>%
+  group_by(county, injury) %>%
+  summarise(total=n(), .groups='keep') %>%
+  pivot_wider(names_from = injury, values_from = total) %>%
+  mutate(total=sum(minor, major, fatal, none, na.rm=T)) %>%
+  arrange(desc(total))
 
 ```
-San Mateo has the highest number of incidents.
+San Diego has the highest number of incidents.
 
 6. Use the table from #5 to make a plot that shows the total number of incidents by county.
 ```{r}
-ggplot(injury_by_county, aes(x = reorder(county, n), y = n, fill = injury)) +
-  geom_bar(stat = "identity") +
-  coord_flip() +
-  labs(title = "Shark Incidents by County and Injury Type", x = "County", y = "Total Incidents", fill = "Injury Type")
+sharks %>%
+  select(county, injury) %>%
+  group_by(county, injury) %>%
+  summarise(total=n(), .groups='keep') %>%
+  pivot_wider(names_from = injury, values_from = total) %>%
+  mutate(total=sum(minor, major, fatal, none, na.rm=T)) %>%
+  arrange(desc(total)) %>%
+  ggplot(aes(x=reorder(county, total), y=total))+
+  geom_col(fill = "pink", alpha = 0.8)
+  labs(title="Shark Incidents by County", 
+       x = NULL, 
+       y = "n")+
+  coord_flip()
 
 ```
 
