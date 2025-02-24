@@ -3,9 +3,11 @@ title: "Lab 12 Homework"
 author: "Sameeksha Deshatty"
 date: "`r Sys.Date()`"
 output:
+  pdf_document:
+    toc: false
   html_document:
     theme: spacelab
-    toc: no
+    toc: false
 ---
 
 ```{r setup, include=FALSE}
@@ -40,28 +42,151 @@ library("gapminder")
 
 1. Use the function(s) of your choice to get an idea of the overall structure of the data frame, including its dimensions, column names, variable classes, etc. As part of this, determine how NA's are treated in the data.   
 ```{r}
-gapminder <- gapminder
+str(gapminder)
+
+head(gapminder)
+
+summary(gapminder)
+
+sum(is.na(gapminder))
+vis_miss(gapminder)  
+
 ```
 
-
 2. How many countries are represented in this dataset? Make a table and a plot that shows the number of countries by continent.  
+```{r}
+country_counts <- gapminder %>%
+  group_by(continent) %>%
+  summarise(num_countries = n_distinct(country))
+
+country_counts
+
+ggplot(country_counts, aes(x = continent, y = num_countries, fill = continent)) +
+  geom_bar(stat = "identity") +
+  labs(title = "Number of Countries per Continent", x = "Continent", y = "Number of Countries") +
+  theme_minimal()
+
+```
 
 3. Which country has the largest population growth since 1952? Show this as a table.  
+```{r}
+pop_growth <- gapminder %>%
+  group_by(country) %>%
+  summarise(pop_growth = max(pop) - min(pop)) %>%
+  arrange(desc(pop_growth))
 
+pop_growth[1, ]
+
+```
+China has the largest population growth since 1970.
 
 4. Make a plot that shows population growth for the country you found in question #3. This plot should show the change over time.  
+```{r}
+top_country <- pop_growth$country[1]
+
+gapminder %>%
+  filter(country == top_country) %>%
+  ggplot(aes(x = year, y = pop)) +
+  geom_line(color = "blue") +
+  geom_point(color = "red") +
+  labs(title = paste("Population Growth in", top_country),
+       x = "Year", y = "Population") +
+  theme_minimal()
+
+```
 
 5. How has global life expectancy changed between 1952 and 2007? Show the min, mean, and max for all countries in the dataset. Show this as a table.  
+```{r}
+life_expectancy_summary <- gapminder %>%
+  group_by(year) %>%
+  summarise(
+    min_lifeExp = min(lifeExp),
+    mean_lifeExp = mean(lifeExp),
+    max_lifeExp = max(lifeExp)
+  )
+life_expectancy_summary
+
+```
 
 6. Make a plot that shows how mean life expectancy has changed over time for each continent. What is your interpretation of what happened in Africa between 1987 and 2002?  
+```{r}
+gapminder %>%
+  group_by(year, continent) %>%
+  summarise(mean_lifeExp = mean(lifeExp), .groups = "drop") %>%
+  ggplot(aes(x = year, y = mean_lifeExp, color = continent)) +
+  geom_line(size = 1.2) +
+  labs(title = "Mean Life Expectancy Over Time by Continent",
+       x = "Year", y = "Mean Life Expectancy") +
+  theme_minimal()
+
+```
+My interpretation is that between 1987 and 2002, the mean life expectancy in Africa held steady at around 54 years and was not increasing. Most likely due to adverse conditions and a lack of technological health improvement as oppposed to the rest of the world.
 
 7. We are interested in the relationship between per capita GDP and life expectancy; i.e. does having more money help you live longer? Show this as a plot.  
+```{r}
+gapminder %>%
+  ggplot(aes(x = gdpPercap, y = lifeExp, color = continent)) +
+  geom_point(alpha = 0.6) +
+  scale_x_log10() +  # Use log scale for better visualization
+  labs(title = "Relationship Between GDP per Capita and Life Expectancy",
+       x = "GDP per Capita (log scale)", y = "Life Expectancy") +
+  theme_minimal()
+
+```
+Yes, the relationship between GDP per capita and life expectancy is positive, meaning a higher GDP per capita does lead to a higher life expectancy. This is likely to advanced technology and access to better healthcare that comes with having money.
 
 8. Which five countries have had the highest GDP per capita growth over the years represented in this dataset? Show this as a table.  
+```{r}
+gdp_growth <- gapminder %>%
+  group_by(country) %>%
+  summarise(gdp_growth = max(gdpPercap) - min(gdpPercap)) %>%
+  arrange(desc(gdp_growth))
+
+top_5_gdp_countries <- gdp_growth %>% slice(1:5)
+top_5_gdp_countries
+
+```
 
 9. How does per capita GDP growth compare between these same five countries? Show this as a plot.  
+```{r}
+gapminder %>%
+  filter(country %in% top_5_gdp_countries$country) %>%
+  ggplot(aes(x = year, y = gdpPercap, color = country)) +
+  geom_line(size = 1.2) +
+  labs(title = "GDP per Capita Growth for Top 5 Countries",
+       x = "Year", y = "GDP per Capita") +
+  scale_y_log10() +  # Use log scale
+  theme_minimal()
 
-10. Do one analysis of your choice that includes a table and plot as outputs.  
+```
+10. Do one analysis of your choice that includes a table and plot as outputs. 
+```{r}
+pop_gdp_table <- gapminder %>%
+  group_by(country) %>%
+  summarise(
+    `Latest Population (millions)` = max(pop) / 1e6,  
+    `Latest GDP per Capita (USD)` = max(gdpPercap), 
+    `Total GDP (Billion USD)` = (max(pop) * max(gdpPercap)) / 1e9  
+  ) %>%
+  arrange(desc(`Total GDP (Billion USD)`))
+
+pop_gdp_table
+
+gapminder %>%
+  ggplot(aes(x = pop, y = gdpPercap, color = continent)) +
+  geom_point(alpha = 0.6, size = 2) +
+  scale_x_log10() + 
+  scale_y_log10() + 
+  labs(
+    title = "Population vs GDP per Capita",
+    x = "Population (log scale)",
+    y = "GDP per Capita (log scale)",
+    color = "Continent"
+  ) +
+  theme_minimal()
+
+```
+
 
 ## Knit and Upload
 Please knit your work as a .pdf or .html file and upload to Canvas. Homework is due before the start of the next lab. No late work is accepted. Make sure to use the formatting conventions of RMarkdown to make your report neat and clean! 
