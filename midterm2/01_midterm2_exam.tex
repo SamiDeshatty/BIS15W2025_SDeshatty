@@ -1,0 +1,492 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage[margin=1in]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdftitle={Midterm 2 W25},
+  pdfauthor={Sameeksha Deshatty},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{Midterm 2 W25}
+\author{Sameeksha Deshatty}
+\date{2025-03-04}
+
+\begin{document}
+\maketitle
+
+\subsection{Instructions}\label{instructions}
+
+Before starting the exam, you need to follow the instructions in
+\texttt{02\_midterm2\_cleaning.Rmd} to clean the data. Once you have
+cleaned the data and produced the \texttt{heart.csv} file, you can start
+the exam.
+
+Answer the following questions and complete the exercises in RMarkdown.
+Please embed all of your code and push your final work to your
+repository. Your code must be organized, clean, and run free from
+errors. Remember, you must remove the \texttt{\#} for any included code
+chunks to run. Be sure to add your name to the author header above.
+
+Your code must knit in order to be considered. If you are stuck and
+cannot answer a question, then comment out your code and knit the
+document. You may use your notes, labs, and homework to help you
+complete this exam. Do not use any other resources- including AI
+assistance or other students' work.
+
+Don't forget to answer any questions that are asked in the prompt! Each
+question must be coded; it cannot be answered by a sort in a spreadsheet
+or a written response.
+
+All plots should be clean, with appropriate labels, and consistent
+aesthetics. Poorly labeled or messy plots will receive a penalty. Your
+plots should be in color and look professional!
+
+Be sure to push your completed midterm to your repository and upload the
+document to Gradescope. This exam is worth 30 points.
+
+\subsection{Load the libraries}\label{load-the-libraries}
+
+You may not use all of these, but they are here for convenience.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(}\StringTok{"tidyverse"}\NormalTok{)}
+\FunctionTok{library}\NormalTok{(}\StringTok{"janitor"}\NormalTok{)}
+\FunctionTok{library}\NormalTok{(}\StringTok{"ggthemes"}\NormalTok{)}
+\FunctionTok{library}\NormalTok{(}\StringTok{"RColorBrewer"}\NormalTok{)}
+\FunctionTok{library}\NormalTok{(}\StringTok{"paletteer"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\subsection{Load the data}\label{load-the-data}
+
+These data are a modified version of the Statlog (Heart) database on
+heart disease from the
+\href{https://archive.ics.uci.edu/dataset/145/statlog+heart}{UCI Machine
+Learning Repository}. The data are also available on
+\href{https://www.kaggle.com/datasets/ritwikb3/heart-disease-statlog/data}{Kaggle}.
+
+You will need the descriptions of the variables to answer the questions.
+Please reference \texttt{03\_midterm2\_descriptions.Rmd} for details.
+
+Run the following to load the data.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{heart }\OtherTok{\textless{}{-}} \FunctionTok{read\_csv}\NormalTok{(}\StringTok{"data/heart.csv"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\subsection{Questions}\label{questions}
+
+Problem 1. (1 point) Use the function of your choice to provide a data
+summary.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{head}\NormalTok{(heart)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 6 x 14
+##     age gender cp       trestbps  chol fbs   restecg thalach exang oldpeak slope
+##   <dbl> <chr>  <chr>       <dbl> <dbl> <lgl> <chr>     <dbl> <chr>   <dbl> <chr>
+## 1    70 male   asympto~      130   322 FALSE left_v~     109 no        2.4 flat 
+## 2    67 female non_ang~      115   564 FALSE left_v~     160 no        1.6 flat 
+## 3    57 male   atypica~      124   261 FALSE normal      141 no        0.3 upsl~
+## 4    64 male   asympto~      128   263 FALSE normal      105 yes       0.2 flat 
+## 5    74 female atypica~      120   269 FALSE left_v~     121 yes       0.2 upsl~
+## 6    65 male   asympto~      120   177 FALSE normal      140 no        0.4 upsl~
+## # i 3 more variables: ca <dbl>, thal <chr>, target <chr>
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{glimpse}\NormalTok{(heart)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Rows: 270
+## Columns: 14
+## $ age      <dbl> 70, 67, 57, 64, 74, 65, 56, 59, 60, 63, 59, 53, 44, 61, 57, 7~
+## $ gender   <chr> "male", "female", "male", "male", "female", "male", "male", "~
+## $ cp       <chr> "asymptomatic", "non_anginal_pain", "atypical_angina", "asymp~
+## $ trestbps <dbl> 130, 115, 124, 128, 120, 120, 130, 110, 140, 150, 135, 142, 1~
+## $ chol     <dbl> 322, 564, 261, 263, 269, 177, 256, 239, 293, 407, 234, 226, 2~
+## $ fbs      <lgl> FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, TRUE, FALSE, FALSE,~
+## $ restecg  <chr> "left_ventricular_hypertrophy", "left_ventricular_hypertrophy~
+## $ thalach  <dbl> 109, 160, 141, 105, 121, 140, 142, 142, 170, 154, 161, 111, 1~
+## $ exang    <chr> "no", "no", "no", "yes", "yes", "no", "yes", "yes", "no", "no~
+## $ oldpeak  <dbl> 2.4, 1.6, 0.3, 0.2, 0.2, 0.4, 0.6, 1.2, 1.2, 4.0, 0.5, 0.0, 0~
+## $ slope    <chr> "flat", "flat", "upsloping", "flat", "upsloping", "upsloping"~
+## $ ca       <dbl> 3, 0, 0, 1, 1, 0, 1, 1, 2, 3, 0, 0, 0, 2, 1, 0, 2, 0, 0, 0, 2~
+## $ thal     <chr> "normal", "reversable_defect", "reversable_defect", "reversab~
+## $ target   <chr> "disease", "no_disease", "disease", "no_disease", "no_disease~
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{summary}\NormalTok{(heart)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##       age           gender               cp               trestbps    
+##  Min.   :29.00   Length:270         Length:270         Min.   : 94.0  
+##  1st Qu.:48.00   Class :character   Class :character   1st Qu.:120.0  
+##  Median :55.00   Mode  :character   Mode  :character   Median :130.0  
+##  Mean   :54.43                                         Mean   :131.3  
+##  3rd Qu.:61.00                                         3rd Qu.:140.0  
+##  Max.   :77.00                                         Max.   :200.0  
+##       chol          fbs            restecg             thalach     
+##  Min.   :126.0   Mode :logical   Length:270         Min.   : 71.0  
+##  1st Qu.:213.0   FALSE:230       Class :character   1st Qu.:133.0  
+##  Median :245.0   TRUE :40        Mode  :character   Median :153.5  
+##  Mean   :249.7                                      Mean   :149.7  
+##  3rd Qu.:280.0                                      3rd Qu.:166.0  
+##  Max.   :564.0                                      Max.   :202.0  
+##     exang              oldpeak        slope                 ca        
+##  Length:270         Min.   :0.00   Length:270         Min.   :0.0000  
+##  Class :character   1st Qu.:0.00   Class :character   1st Qu.:0.0000  
+##  Mode  :character   Median :0.80   Mode  :character   Median :0.0000  
+##                     Mean   :1.05                      Mean   :0.6704  
+##                     3rd Qu.:1.60                      3rd Qu.:1.0000  
+##                     Max.   :6.20                      Max.   :3.0000  
+##      thal              target         
+##  Length:270         Length:270        
+##  Class :character   Class :character  
+##  Mode  :character   Mode  :character  
+##                                       
+##                                       
+## 
+\end{verbatim}
+
+Problem 2. (1 point) Let's explore the demographics of participants
+included in the study. What is the number of males and females? Show
+this as a table.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{demographics }\OtherTok{\textless{}{-}}\NormalTok{ heart }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{count}\NormalTok{(gender, }\AttributeTok{sort =} \ConstantTok{TRUE}\NormalTok{)}
+
+\NormalTok{demographics}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 2 x 2
+##   gender     n
+##   <chr>  <int>
+## 1 male     183
+## 2 female    87
+\end{verbatim}
+
+There are 183 male participants and 87 female participants in this
+study.
+
+Problem 3. (2 points) What is the average age of participants by gender?
+Show this as a table.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{avg\_age }\OtherTok{\textless{}{-}}\NormalTok{ heart }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{group\_by}\NormalTok{(gender) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{summarize}\NormalTok{(}\AttributeTok{mean\_age=}\FunctionTok{mean}\NormalTok{(age, }\AttributeTok{na.rm=}\NormalTok{T))}
+
+\NormalTok{avg\_age}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 2 x 2
+##   gender mean_age
+##   <chr>     <dbl>
+## 1 female     55.7
+## 2 male       53.8
+\end{verbatim}
+
+The average age of female participats is 55.68 and the average age of
+male participants is 53.84
+
+Problem 4. (1 point) Among males and females, how many have/do not have
+heart disease? Show this as a table, grouped by gender.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{disease\_target\_gender }\OtherTok{\textless{}{-}}\NormalTok{ heart }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{group\_by}\NormalTok{(gender) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{count}\NormalTok{(target, }\AttributeTok{sort=} \ConstantTok{TRUE}\NormalTok{)}
+
+\NormalTok{disease\_target\_gender}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 4 x 3
+## # Groups:   gender [2]
+##   gender target         n
+##   <chr>  <chr>      <int>
+## 1 male   disease      100
+## 2 male   no_disease    83
+## 3 female no_disease    67
+## 4 female disease       20
+\end{verbatim}
+
+Among all male participants: 100 of the have heart disease, while 83 of
+them do not. Among all female participants: 20 of them have heart
+disease, while 20 of them do not.
+
+Problem 5. (4 points) What is the percentage of males and females with
+heart disease? Show this as a table, grouped by gender.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#percent\_target\_gender \textless{}{-} heart \%\textgreater{}\%}
+  \CommentTok{\#group\_by(gender) \%\textgreater{}\%}
+  \CommentTok{\#count(target, sort= TRUE) \%\textgreater{}\%}
+  \CommentTok{\#filter(target == "disease") \%\textgreater{}\%}
+  \CommentTok{\#mutate(per=(n/demographics))}
+
+\CommentTok{\#percent\_target\_gender}
+\end{Highlighting}
+\end{Shaded}
+
+Problem 6. (3 points) Make a plot that shows the results of your
+analysis from problem 5. If you couldn't get the percentages to work,
+then make a plot that shows the number of participants with and without
+heart disease by gender.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#disease\_target\_gender \textless{}{-} heart \%\textgreater{}\%}
+  \CommentTok{\#group\_by(gender) \%\textgreater{}\%}
+  \CommentTok{\#count(target, sort= TRUE)\%\textgreater{}\%}
+  \CommentTok{\#ggplot(data=heart, aes(x=gender, y=target))+}
+  \CommentTok{\#geom\_col()}
+
+\CommentTok{\#disease\_target\_gender}
+\end{Highlighting}
+\end{Shaded}
+
+Problem 7. (3 points) Is there a relationship between age and
+cholesterol levels? Make a plot that shows this relationship separated
+by gender (hint: use faceting or make two plots). Be sure to add a line
+of best fit (linear regression line).
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{age\_chol\_male }\OtherTok{\textless{}{-}}\NormalTok{ heart}\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{group\_by}\NormalTok{(gender)}\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{filter}\NormalTok{(gender }\SpecialCharTok{==} \StringTok{"male"}\NormalTok{)}
+\FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data=}\NormalTok{age\_chol\_male, }\AttributeTok{mapping=}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{age, }\AttributeTok{y=}\NormalTok{chol))}\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{()}\SpecialCharTok{+}
+  \FunctionTok{geom\_smooth}\NormalTok{(}\AttributeTok{method=}\NormalTok{lm, }\AttributeTok{se=}\NormalTok{F, }\AttributeTok{na.rm=}\NormalTok{F)}\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Cholesterol Levels by Age {-} Male"}\NormalTok{, }\AttributeTok{x =} \StringTok{"Age"}\NormalTok{, }\AttributeTok{y =} \StringTok{"Cholesterol"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## `geom_smooth()` using formula = 'y ~ x'
+\end{verbatim}
+
+\includegraphics{01_midterm2_exam_files/figure-latex/unnamed-chunk-9-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{age\_chol\_female }\OtherTok{\textless{}{-}}\NormalTok{ heart}\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{group\_by}\NormalTok{(gender)}\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{filter}\NormalTok{(gender }\SpecialCharTok{==} \StringTok{"female"}\NormalTok{)}
+\FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data=}\NormalTok{age\_chol\_female, }\AttributeTok{mapping=}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{age, }\AttributeTok{y=}\NormalTok{chol))}\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{()}\SpecialCharTok{+}
+  \FunctionTok{geom\_smooth}\NormalTok{(}\AttributeTok{method=}\NormalTok{lm, }\AttributeTok{se=}\NormalTok{F, }\AttributeTok{na.rm=}\NormalTok{F)}\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Cholesterol Levels by Age {-} Female"}\NormalTok{, }\AttributeTok{x =} \StringTok{"Age"}\NormalTok{, }\AttributeTok{y =} \StringTok{"Cholesterol"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## `geom_smooth()` using formula = 'y ~ x'
+\end{verbatim}
+
+\includegraphics{01_midterm2_exam_files/figure-latex/unnamed-chunk-9-2.pdf}
+
+Problem 8. (3 points) What is the range of resting blood pressure for
+participants by type of chest pain? Make a plot that shows this
+information.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{bps }\OtherTok{\textless{}{-}}\NormalTok{ heart}\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{group\_by}\NormalTok{(cp)}\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{count}\NormalTok{(trestbps, }\AttributeTok{sort =} \ConstantTok{TRUE}\NormalTok{)}\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data=}\NormalTok{ heart, }\AttributeTok{mapping=}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{cp, }\AttributeTok{y=}\NormalTok{trestbps))}\SpecialCharTok{+}
+  \FunctionTok{geom\_boxplot}\NormalTok{()}\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Resting Blood Pressure Range by Type of Chest Pain"}\NormalTok{, }\AttributeTok{x =} \StringTok{"Chest Pain Type"}\NormalTok{, }\AttributeTok{y =} \StringTok{"Resting Blood Pressure Range"}\NormalTok{)}
+
+\NormalTok{bps}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{01_midterm2_exam_files/figure-latex/unnamed-chunk-10-1.pdf}
+
+Problem 9. (4 points) What is the distribution of maximum heart rate
+achieved, separated by gender and whether or not the patient has heart
+disease? Make a plot that shows this information- you must use faceting.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{heart }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{group\_by}\NormalTok{(gender, target) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{count}\NormalTok{(thalach, }\AttributeTok{sort =} \ConstantTok{TRUE}\NormalTok{)}\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{gender, }\AttributeTok{y=}\NormalTok{thalach))}\SpecialCharTok{+}
+    \FunctionTok{geom\_col}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{01_midterm2_exam_files/figure-latex/unnamed-chunk-11-1.pdf}
+
+Problem 10. (4 points) What is the range of ST depression (oldpeak) by
+the number of major vessels colored by fluoroscopy (ca)? Make a plot
+that shows this relationship. (hint: should ca be a factor or numeric
+variable?)
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{range\_dep }\OtherTok{\textless{}{-}}\NormalTok{ heart}\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{group\_by}\NormalTok{(ca)}\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{count}\NormalTok{(oldpeak, }\AttributeTok{sort =} \ConstantTok{TRUE}\NormalTok{)}\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data=}\NormalTok{ heart, }\AttributeTok{mapping=}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{oldpeak, }\AttributeTok{y=}\NormalTok{ca))}\SpecialCharTok{+}
+  \FunctionTok{geom\_col}\NormalTok{()}\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Range of ST Depression"}\NormalTok{, }\AttributeTok{x =} \StringTok{"Fluroscopy"}\NormalTok{, }\AttributeTok{y =} \StringTok{"St Depression"}\NormalTok{)}
+
+\NormalTok{range\_dep}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{01_midterm2_exam_files/figure-latex/unnamed-chunk-12-1.pdf}
+
+Problem 11. (4 points) Is there an age group where we see increased
+prevalence of heart disease? Make a plot that shows the number of
+participants with and without heart disease by age group.
+
+\subsection{Submit the Midterm}\label{submit-the-midterm}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Save your work and knit the .rmd file.\\
+\item
+  Open the .html file and ``print'' it to a .pdf file in Google Chrome
+  (not Safari).\\
+\item
+  Go to the class Canvas page and open Gradescope.\\
+\item
+  Submit your .pdf file to the midterm assignment- be sure to assign the
+  pages to the correct questions.\\
+\item
+  Commit and push your work to your repository.
+\end{enumerate}
+
+\end{document}
