@@ -38,7 +38,7 @@ Because some of these maps are proprietary, you will need an API key to use them
 
 Start by making an account with [Stadia Maps](https://client.stadiamaps.com/signup/). You need to add a "property" which is just a name for your project. Once you have an account, you can get an API key. Use the following code to register your key.  
 ```{r}
-#register_stadiamaps("Your API Key", write = FALSE)
+register_stadiamaps("292ee626-63ca-408d-b833-5555b8a3253d", write = FALSE)
 ```
 
 ## Load the Data
@@ -118,7 +118,7 @@ bbox2 <- make_bbox(long, lat, f=0.3)
 
 2. Load a map from `stamen` in a terrain style projection and display the map.
 ```{r}
-map2 <- get_stadiamap(bbox2, maptype = "stamen_terrain", zoom=7)
+map2 <- get_stadiamap(bbox2, maptype = "stamen_terrain", zoom=5)
 ```
 
 ```{r}

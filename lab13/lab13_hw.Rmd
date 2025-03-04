@@ -1,11 +1,11 @@
 ---
-title: "Lab 13 Homework"
-author: "Please Add Your Name Here"
-date: "`r Sys.Date()`"
+title: "Lab 13 Homewo"
 output:
+  pdf_document:
+    toc: false
   html_document:
     theme: spacelab
-    toc: no
+    toc: false
 ---
 
 ## Instructions
@@ -27,30 +27,38 @@ The first [data set](https://rcweb.dartmouth.edu/~f002d69/workshops/index_rspati
 
 1. Load the `grizzly` data and evaluate its structure.  
 ```{r}
+grizzly <- read_csv("data/bear-sightings.csv") %>% clean_names()
+
+glimpse(grizzly)
+summary(grizzly)
 
 ```
 
 2. Use the range of the latitude and longitude to build an appropriate bounding box for your map.  
 ```{r}
-
+lat <- c(55.02, 70.37)
+long <- c(-166.2, -131.3)
+bbox <- make_bbox(long, lat, f = 0.03)
 ```
 
 3. Load a map from `stadiamaps` in a `stamen_terrain` projection and display the map. Hint: use zoom=5.  
 ```{r}
-
+register_stadiamaps("292ee626-63ca-408d-b833-5555b8a3253d", write = FALSE)
 ```
 
 ```{r}
-
+map1 <- get_stadiamap(bbox, maptype = "stamen_terrain", zoom=5)
 ```
 
 ```{r}
-
+ggmap(map1)
 ```
 
 4. Build a final map that overlays the recorded observations of grizzly bears in Alaska.  
 ```{r}
-
+ggmap(map1)+
+  geom_point(data=grizzly, aes(x=longitude, y=latitude), size=0.8)+
+  labs(x="Longitude", y="Latitude", title="Recorded Grizzly Observations in Alaska")
 ```
 
 ## Push your final code to GitHub!
